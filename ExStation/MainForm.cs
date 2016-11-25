@@ -14,6 +14,7 @@ namespace ExStation
     public partial class MainForm : Form
     {
         public member member_info;
+        public scuser user_info;
 
         public MainForm()
         {
@@ -32,6 +33,9 @@ namespace ExStation
                 DlgLogin login = new DlgLogin(this);
                 if (login.ShowDialog() == DialogResult.OK)
                 {
+                    DlgCompanySelect comp = new DlgCompanySelect(login.member_info, login.user_info);
+                    comp.ShowDialog();
+
                     this.member_info = login.member_info;
                     this.toolStripStatusLabel1.Text = this.member_info.prename + " " + this.member_info.name;
                 }

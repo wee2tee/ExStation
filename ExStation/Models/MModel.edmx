@@ -4,23 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="mModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="dbprofile">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="servername" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="dbname" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="dbuser" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="dbpassword" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="compname" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="dbcode" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="creby" Type="int" Nullable="false" />
-          <Property Name="credate" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="chgby" Type="int" />
-          <Property Name="chgdate" Type="datetime" Precision="0" />
-        </EntityType>
+      <Schema Namespace="mModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="member">
           <Key>
             <PropertyRef Name="id" />
@@ -33,6 +17,7 @@
           <Property Name="addr02" Type="varchar" MaxLength="50" />
           <Property Name="addr03" Type="varchar" MaxLength="30" />
           <Property Name="zipcod" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="taxid" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="telnum" Type="varchar" MaxLength="20" />
           <Property Name="faxnum" Type="varchar" MaxLength="20" />
           <Property Name="contact" Type="varchar" MaxLength="50" Nullable="false" />
@@ -40,6 +25,50 @@
           <Property Name="membertype" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="maxdbcount" Type="int" Nullable="false" />
           <Property Name="status" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="credate" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="chgdate" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="scacclv">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="leveltype" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="menu" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="submenu" Type="varchar" MaxLength="50" />
+          <Property Name="member_id" Type="int" Nullable="false" />
+          <Property Name="scusergroup_id" Type="int" />
+          <Property Name="scuser_id" Type="int" />
+          <Property Name="sccompgroup_id" Type="int" Nullable="false" />
+          <Property Name="credate" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="chgdate" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="sccomp">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="servername" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dbname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="dbuser" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="dbpassword" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="compname" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="credate" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="chgdate" Type="datetime" Precision="0" />
+          <Property Name="member_id" Type="int" Nullable="false" />
+          <Property Name="creby" Type="int" Nullable="false" />
+          <Property Name="chgby" Type="int" />
+          <Property Name="sccompgroup_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sccompgroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="groupname" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="credate" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="chgdate" Type="datetime" Precision="0" />
+          <Property Name="member_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="scuser">
           <Key>
@@ -48,33 +77,151 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="username" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="passwordhash" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="50" />
+          <Property Name="authlev" Type="int" Nullable="false" />
+          <Property Name="language" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="secure" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="lastlogin" Type="datetime" Precision="0" />
+          <Property Name="lastpwd" Type="datetime" Precision="0" />
+          <Property Name="status" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="currentlyuse" Type="bool" Nullable="false" />
+          <Property Name="credate" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="chgdate" Type="datetime" Precision="0" />
           <Property Name="member_id" Type="int" Nullable="false" />
+          <Property Name="scusergroup_id" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="fk_dbprofile_member">
+        <EntityType Name="scusergroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="groupname" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="50" />
+          <Property Name="member_id" Type="int" Nullable="false" />
+          <Property Name="credate" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="chgdate" Type="datetime" Precision="0" />
+        </EntityType>
+        <Association Name="fk-scacclv-member_id">
           <End Role="member" Type="Self.member" Multiplicity="1" />
-          <End Role="dbprofile" Type="Self.dbprofile" Multiplicity="*" />
+          <End Role="scacclv" Type="Self.scacclv" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="member">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="dbprofile">
-              <PropertyRef Name="creby" />
+            <Dependent Role="scacclv">
+              <PropertyRef Name="member_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_dbprofile_member1">
-          <End Role="member" Type="Self.member" Multiplicity="0..1" />
-          <End Role="dbprofile" Type="Self.dbprofile" Multiplicity="*" />
+        <Association Name="fk-scacclv-sccompgroup_id">
+          <End Role="sccompgroup" Type="Self.sccompgroup" Multiplicity="1" />
+          <End Role="scacclv" Type="Self.scacclv" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="member">
+            <Principal Role="sccompgroup">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="dbprofile">
+            <Dependent Role="scacclv">
+              <PropertyRef Name="sccompgroup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk-scacclv-scuser_id">
+          <End Role="scuser" Type="Self.scuser" Multiplicity="0..1" />
+          <End Role="scacclv" Type="Self.scacclv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scuser">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="scacclv">
+              <PropertyRef Name="scuser_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk-scacclv-scusergroup_id">
+          <End Role="scusergroup" Type="Self.scusergroup" Multiplicity="0..1" />
+          <End Role="scacclv" Type="Self.scacclv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scusergroup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="scacclv">
+              <PropertyRef Name="scusergroup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk-sccomp-chgby-scuser_id">
+          <End Role="scuser" Type="Self.scuser" Multiplicity="0..1" />
+          <End Role="sccomp" Type="Self.sccomp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scuser">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sccomp">
               <PropertyRef Name="chgby" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_scuser-member_id_member-id">
+        <Association Name="fk-sccomp-creby-scuser_id">
+          <End Role="scuser" Type="Self.scuser" Multiplicity="1" />
+          <End Role="sccomp" Type="Self.sccomp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scuser">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sccomp">
+              <PropertyRef Name="creby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk-sccompgroup-member_id">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="sccompgroup" Type="Self.sccompgroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sccompgroup">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk-sccomp-member_id">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="sccomp" Type="Self.sccomp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sccomp">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk-sccomp-scdbgroup_id">
+          <End Role="sccompgroup" Type="Self.sccompgroup" Multiplicity="1" />
+          <End Role="sccomp" Type="Self.sccomp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sccompgroup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sccomp">
+              <PropertyRef Name="sccompgroup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk-scusergroup-member_id">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="scusergroup" Type="Self.scusergroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="scusergroup">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk-scuser-member_id">
           <End Role="member" Type="Self.member" Multiplicity="1" />
           <End Role="scuser" Type="Self.scuser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -86,28 +233,127 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk-scuser-scusergroup_id">
+          <End Role="scusergroup" Type="Self.scusergroup" Multiplicity="1" />
+          <End Role="scuser" Type="Self.scuser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scusergroup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="scuser">
+              <PropertyRef Name="scusergroup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="mModelStoreContainer">
-          <EntitySet Name="dbprofile" EntityType="Self.dbprofile" Schema="xmember" store:Type="Tables" />
           <EntitySet Name="member" EntityType="Self.member" Schema="xmember" store:Type="Tables" />
+          <EntitySet Name="scacclv" EntityType="Self.scacclv" Schema="xmember" store:Type="Tables" />
+          <EntitySet Name="sccomp" EntityType="Self.sccomp" Schema="xmember" store:Type="Tables" />
+          <EntitySet Name="sccompgroup" EntityType="Self.sccompgroup" Schema="xmember" store:Type="Tables" />
           <EntitySet Name="scuser" EntityType="Self.scuser" Schema="xmember" store:Type="Tables" />
-          <AssociationSet Name="fk_dbprofile_member" Association="Self.fk_dbprofile_member">
+          <EntitySet Name="scusergroup" EntityType="Self.scusergroup" Schema="xmember" store:Type="Tables" />
+          <AssociationSet Name="fk-scacclv-member_id" Association="Self.fk-scacclv-member_id">
             <End Role="member" EntitySet="member" />
-            <End Role="dbprofile" EntitySet="dbprofile" />
+            <End Role="scacclv" EntitySet="scacclv" />
           </AssociationSet>
-          <AssociationSet Name="fk_dbprofile_member1" Association="Self.fk_dbprofile_member1">
+          <AssociationSet Name="fk-scacclv-sccompgroup_id" Association="Self.fk-scacclv-sccompgroup_id">
+            <End Role="sccompgroup" EntitySet="sccompgroup" />
+            <End Role="scacclv" EntitySet="scacclv" />
+          </AssociationSet>
+          <AssociationSet Name="fk-scacclv-scuser_id" Association="Self.fk-scacclv-scuser_id">
+            <End Role="scuser" EntitySet="scuser" />
+            <End Role="scacclv" EntitySet="scacclv" />
+          </AssociationSet>
+          <AssociationSet Name="fk-scacclv-scusergroup_id" Association="Self.fk-scacclv-scusergroup_id">
+            <End Role="scusergroup" EntitySet="scusergroup" />
+            <End Role="scacclv" EntitySet="scacclv" />
+          </AssociationSet>
+          <AssociationSet Name="fk-sccomp-chgby-scuser_id" Association="Self.fk-sccomp-chgby-scuser_id">
+            <End Role="scuser" EntitySet="scuser" />
+            <End Role="sccomp" EntitySet="sccomp" />
+          </AssociationSet>
+          <AssociationSet Name="fk-sccomp-creby-scuser_id" Association="Self.fk-sccomp-creby-scuser_id">
+            <End Role="scuser" EntitySet="scuser" />
+            <End Role="sccomp" EntitySet="sccomp" />
+          </AssociationSet>
+          <AssociationSet Name="fk-sccompgroup-member_id" Association="Self.fk-sccompgroup-member_id">
             <End Role="member" EntitySet="member" />
-            <End Role="dbprofile" EntitySet="dbprofile" />
+            <End Role="sccompgroup" EntitySet="sccompgroup" />
           </AssociationSet>
-          <AssociationSet Name="fk_scuser-member_id_member-id" Association="Self.fk_scuser-member_id_member-id">
+          <AssociationSet Name="fk-sccomp-member_id" Association="Self.fk-sccomp-member_id">
+            <End Role="member" EntitySet="member" />
+            <End Role="sccomp" EntitySet="sccomp" />
+          </AssociationSet>
+          <AssociationSet Name="fk-sccomp-scdbgroup_id" Association="Self.fk-sccomp-scdbgroup_id">
+            <End Role="sccompgroup" EntitySet="sccompgroup" />
+            <End Role="sccomp" EntitySet="sccomp" />
+          </AssociationSet>
+          <AssociationSet Name="fk-scusergroup-member_id" Association="Self.fk-scusergroup-member_id">
+            <End Role="member" EntitySet="member" />
+            <End Role="scusergroup" EntitySet="scusergroup" />
+          </AssociationSet>
+          <AssociationSet Name="fk-scuser-member_id" Association="Self.fk-scuser-member_id">
             <End Role="member" EntitySet="member" />
             <End Role="scuser" EntitySet="scuser" />
           </AssociationSet>
+          <AssociationSet Name="fk-scuser-scusergroup_id" Association="Self.fk-scuser-scusergroup_id">
+            <End Role="scusergroup" EntitySet="scusergroup" />
+            <End Role="scuser" EntitySet="scuser" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="mModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="dbprofile">
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="membercode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prename" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="addr01" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="addr02" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="addr03" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="zipcod" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="taxid" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telnum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="faxnum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="membertype" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="maxdbcount" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="credate" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="chgdate" Type="DateTime" />
+          <NavigationProperty Name="scacclv" Relationship="Self.fk_scacclv_member_id" FromRole="member" ToRole="scacclv" />
+          <NavigationProperty Name="sccompgroup" Relationship="Self.fk_sccompgroup_member_id" FromRole="member" ToRole="sccompgroup" />
+          <NavigationProperty Name="sccomp" Relationship="Self.fk_sccomp_member_id" FromRole="member" ToRole="sccomp" />
+          <NavigationProperty Name="scusergroup" Relationship="Self.fk_scusergroup_member_id" FromRole="member" ToRole="scusergroup" />
+          <NavigationProperty Name="scuser" Relationship="Self.fk_scuser_member_id" FromRole="member" ToRole="scuser" />
+        </EntityType>
+        <EntityType Name="scacclv">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="leveltype" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="menu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="submenu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="member_id" Type="Int32" Nullable="false" />
+          <Property Name="scusergroup_id" Type="Int32" />
+          <Property Name="scuser_id" Type="Int32" />
+          <Property Name="sccompgroup_id" Type="Int32" Nullable="false" />
+          <Property Name="credate" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="chgdate" Type="DateTime" />
+          <NavigationProperty Name="member" Relationship="Self.fk_scacclv_member_id" FromRole="scacclv" ToRole="member" />
+          <NavigationProperty Name="sccompgroup" Relationship="Self.fk_scacclv_sccompgroup_id" FromRole="scacclv" ToRole="sccompgroup" />
+          <NavigationProperty Name="scuser" Relationship="Self.fk_scacclv_scuser_id" FromRole="scacclv" ToRole="scuser" />
+          <NavigationProperty Name="scusergroup" Relationship="Self.fk_scacclv_scusergroup_id" FromRole="scacclv" ToRole="scusergroup" />
+        </EntityType>
+        <EntityType Name="sccomp">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -117,91 +363,120 @@
           <Property Name="dbuser" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="dbpassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="compname" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dbcode" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="creby" Type="Int32" Nullable="false" />
           <Property Name="credate" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="chgby" Type="Int32" />
           <Property Name="chgdate" Type="DateTime" />
-          <NavigationProperty Name="fkCreby_Member" Relationship="Self.fk_dbprofile_member" FromRole="dbprofile" ToRole="member" />
-          <NavigationProperty Name="fkChgby_Member" Relationship="Self.fk_dbprofile_member1" FromRole="dbprofile" ToRole="member" />
+          <Property Name="member_id" Type="Int32" Nullable="false" />
+          <Property Name="creby" Type="Int32" Nullable="false" />
+          <Property Name="chgby" Type="Int32" />
+          <Property Name="sccompgroup_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="member" Relationship="Self.fk_sccomp_member_id" FromRole="sccomp" ToRole="member" />
+          <NavigationProperty Name="scuser" Relationship="Self.fk_sccomp_chgby_scuser_id" FromRole="sccomp" ToRole="scuser" />
+          <NavigationProperty Name="scuser1" Relationship="Self.fk_sccomp_creby_scuser_id" FromRole="sccomp" ToRole="scuser" />
+          <NavigationProperty Name="sccompgroup" Relationship="Self.fk_sccomp_scdbgroup_id" FromRole="sccomp" ToRole="sccompgroup" />
         </EntityType>
-        <EntityType Name="member">
+        <EntityType Name="sccompgroup">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="membercode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="prename" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="addr01" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="addr02" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="addr03" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="zipcod" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="telnum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="faxnum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="membertype" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="maxdbcount" Type="Int32" Nullable="false" />
-          <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="dbprofile_creby" Relationship="Self.fk_dbprofile_member" FromRole="member" ToRole="dbprofile" />
-          <NavigationProperty Name="dbprofile_chgby" Relationship="Self.fk_dbprofile_member1" FromRole="member" ToRole="dbprofile" />
-          <NavigationProperty Name="scuser" Relationship="mModel.fk_scuser_member_id_member_id" FromRole="member" ToRole="scuser" />
+          <Property Name="groupname" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="credate" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="chgdate" Type="DateTime" />
+          <Property Name="member_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="member" Relationship="Self.fk_sccompgroup_member_id" FromRole="sccompgroup" ToRole="member" />
+          <NavigationProperty Name="scacclv" Relationship="Self.fk_scacclv_sccompgroup_id" FromRole="sccompgroup" ToRole="scacclv" />
+          <NavigationProperty Name="sccomp" Relationship="Self.fk_sccomp_scdbgroup_id" FromRole="sccompgroup" ToRole="sccomp" />
         </EntityType>
-        <Association Name="fk_dbprofile_member">
-          <End Role="member" Type="Self.member" Multiplicity="1" />
-          <End Role="dbprofile" Type="Self.dbprofile" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="member">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="dbprofile">
-              <PropertyRef Name="creby" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_dbprofile_member1">
-          <End Role="member" Type="Self.member" Multiplicity="0..1" />
-          <End Role="dbprofile" Type="Self.dbprofile" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="member">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="dbprofile">
-              <PropertyRef Name="chgby" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="mEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="dbprofile" EntityType="Self.dbprofile" />
-          <EntitySet Name="member" EntityType="Self.member" />
-          <AssociationSet Name="fk_dbprofile_member" Association="Self.fk_dbprofile_member">
-            <End Role="member" EntitySet="member" />
-            <End Role="dbprofile" EntitySet="dbprofile" />
-          </AssociationSet>
-          <AssociationSet Name="fk_dbprofile_member1" Association="Self.fk_dbprofile_member1">
-            <End Role="member" EntitySet="member" />
-            <End Role="dbprofile" EntitySet="dbprofile" />
-          </AssociationSet>
-          <EntitySet Name="scuser" EntityType="mModel.scuser" />
-          <AssociationSet Name="fk_scuser_member_id_member_id" Association="mModel.fk_scuser_member_id_member_id">
-            <End Role="member" EntitySet="member" />
-            <End Role="scuser" EntitySet="scuser" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="scuser">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="username" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="passwordhash" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="passwordhash" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="authlev" Type="Int32" Nullable="false" />
+          <Property Name="language" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="secure" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastlogin" Type="DateTime" />
+          <Property Name="lastpwd" Type="DateTime" />
+          <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="currentlyuse" Type="Boolean" Nullable="false" />
+          <Property Name="credate" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="chgdate" Type="DateTime" />
           <Property Name="member_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="member" Relationship="mModel.fk_scuser_member_id_member_id" FromRole="scuser" ToRole="member" />
+          <Property Name="scusergroup_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="member" Relationship="Self.fk_scuser_member_id" FromRole="scuser" ToRole="member" />
+          <NavigationProperty Name="scacclv" Relationship="Self.fk_scacclv_scuser_id" FromRole="scuser" ToRole="scacclv" />
+          <NavigationProperty Name="sccomp" Relationship="Self.fk_sccomp_chgby_scuser_id" FromRole="scuser" ToRole="sccomp" />
+          <NavigationProperty Name="sccomp1" Relationship="Self.fk_sccomp_creby_scuser_id" FromRole="scuser" ToRole="sccomp" />
+          <NavigationProperty Name="scusergroup" Relationship="Self.fk_scuser_scusergroup_id" FromRole="scuser" ToRole="scusergroup" />
         </EntityType>
-        <Association Name="fk_scuser_member_id_member_id">
-          <End Type="mModel.member" Role="member" Multiplicity="1" />
-          <End Type="mModel.scuser" Role="scuser" Multiplicity="*" />
+        <EntityType Name="scusergroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="groupname" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="member_id" Type="Int32" Nullable="false" />
+          <Property Name="credate" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="chgdate" Type="DateTime" />
+          <NavigationProperty Name="member" Relationship="Self.fk_scusergroup_member_id" FromRole="scusergroup" ToRole="member" />
+          <NavigationProperty Name="scacclv" Relationship="Self.fk_scacclv_scusergroup_id" FromRole="scusergroup" ToRole="scacclv" />
+          <NavigationProperty Name="scuser" Relationship="Self.fk_scuser_scusergroup_id" FromRole="scusergroup" ToRole="scuser" />
+        </EntityType>
+        <Association Name="fk_scacclv_member_id">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="scacclv" Type="Self.scacclv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="scacclv">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sccompgroup_member_id">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="sccompgroup" Type="Self.sccompgroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sccompgroup">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sccomp_member_id">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="sccomp" Type="Self.sccomp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sccomp">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_scusergroup_member_id">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="scusergroup" Type="Self.scusergroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="scusergroup">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_scuser_member_id">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="scuser" Type="Self.scuser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="member">
               <PropertyRef Name="id" />
@@ -211,40 +486,164 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_scacclv_sccompgroup_id">
+          <End Role="sccompgroup" Type="Self.sccompgroup" Multiplicity="1" />
+          <End Role="scacclv" Type="Self.scacclv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sccompgroup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="scacclv">
+              <PropertyRef Name="sccompgroup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_scacclv_scuser_id">
+          <End Role="scuser" Type="Self.scuser" Multiplicity="0..1" />
+          <End Role="scacclv" Type="Self.scacclv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scuser">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="scacclv">
+              <PropertyRef Name="scuser_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_scacclv_scusergroup_id">
+          <End Role="scusergroup" Type="Self.scusergroup" Multiplicity="0..1" />
+          <End Role="scacclv" Type="Self.scacclv" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scusergroup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="scacclv">
+              <PropertyRef Name="scusergroup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sccomp_chgby_scuser_id">
+          <End Role="scuser" Type="Self.scuser" Multiplicity="0..1" />
+          <End Role="sccomp" Type="Self.sccomp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scuser">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sccomp">
+              <PropertyRef Name="chgby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sccomp_creby_scuser_id">
+          <End Role="scuser" Type="Self.scuser" Multiplicity="1" />
+          <End Role="sccomp" Type="Self.sccomp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scuser">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sccomp">
+              <PropertyRef Name="creby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sccomp_scdbgroup_id">
+          <End Role="sccompgroup" Type="Self.sccompgroup" Multiplicity="1" />
+          <End Role="sccomp" Type="Self.sccomp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sccompgroup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="sccomp">
+              <PropertyRef Name="sccompgroup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_scuser_scusergroup_id">
+          <End Role="scusergroup" Type="Self.scusergroup" Multiplicity="1" />
+          <End Role="scuser" Type="Self.scuser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="scusergroup">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="scuser">
+              <PropertyRef Name="scusergroup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="mEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="member" EntityType="Self.member" />
+          <EntitySet Name="scacclv" EntityType="Self.scacclv" />
+          <EntitySet Name="sccomp" EntityType="Self.sccomp" />
+          <EntitySet Name="sccompgroup" EntityType="Self.sccompgroup" />
+          <EntitySet Name="scuser" EntityType="Self.scuser" />
+          <EntitySet Name="scusergroup" EntityType="Self.scusergroup" />
+          <AssociationSet Name="fk_scacclv_member_id" Association="Self.fk_scacclv_member_id">
+            <End Role="member" EntitySet="member" />
+            <End Role="scacclv" EntitySet="scacclv" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sccompgroup_member_id" Association="Self.fk_sccompgroup_member_id">
+            <End Role="member" EntitySet="member" />
+            <End Role="sccompgroup" EntitySet="sccompgroup" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sccomp_member_id" Association="Self.fk_sccomp_member_id">
+            <End Role="member" EntitySet="member" />
+            <End Role="sccomp" EntitySet="sccomp" />
+          </AssociationSet>
+          <AssociationSet Name="fk_scusergroup_member_id" Association="Self.fk_scusergroup_member_id">
+            <End Role="member" EntitySet="member" />
+            <End Role="scusergroup" EntitySet="scusergroup" />
+          </AssociationSet>
+          <AssociationSet Name="fk_scuser_member_id" Association="Self.fk_scuser_member_id">
+            <End Role="member" EntitySet="member" />
+            <End Role="scuser" EntitySet="scuser" />
+          </AssociationSet>
+          <AssociationSet Name="fk_scacclv_sccompgroup_id" Association="Self.fk_scacclv_sccompgroup_id">
+            <End Role="sccompgroup" EntitySet="sccompgroup" />
+            <End Role="scacclv" EntitySet="scacclv" />
+          </AssociationSet>
+          <AssociationSet Name="fk_scacclv_scuser_id" Association="Self.fk_scacclv_scuser_id">
+            <End Role="scuser" EntitySet="scuser" />
+            <End Role="scacclv" EntitySet="scacclv" />
+          </AssociationSet>
+          <AssociationSet Name="fk_scacclv_scusergroup_id" Association="Self.fk_scacclv_scusergroup_id">
+            <End Role="scusergroup" EntitySet="scusergroup" />
+            <End Role="scacclv" EntitySet="scacclv" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sccomp_chgby_scuser_id" Association="Self.fk_sccomp_chgby_scuser_id">
+            <End Role="scuser" EntitySet="scuser" />
+            <End Role="sccomp" EntitySet="sccomp" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sccomp_creby_scuser_id" Association="Self.fk_sccomp_creby_scuser_id">
+            <End Role="scuser" EntitySet="scuser" />
+            <End Role="sccomp" EntitySet="sccomp" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sccomp_scdbgroup_id" Association="Self.fk_sccomp_scdbgroup_id">
+            <End Role="sccompgroup" EntitySet="sccompgroup" />
+            <End Role="sccomp" EntitySet="sccomp" />
+          </AssociationSet>
+          <AssociationSet Name="fk_scuser_scusergroup_id" Association="Self.fk_scuser_scusergroup_id">
+            <End Role="scusergroup" EntitySet="scusergroup" />
+            <End Role="scuser" EntitySet="scuser" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="mModelStoreContainer" CdmEntityContainer="mEntities">
-          <EntitySetMapping Name="dbprofile">
-            <EntityTypeMapping TypeName="mModel.dbprofile">
-              <MappingFragment StoreEntitySet="dbprofile">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="servername" ColumnName="servername" />
-                <ScalarProperty Name="dbname" ColumnName="dbname" />
-                <ScalarProperty Name="dbuser" ColumnName="dbuser" />
-                <ScalarProperty Name="dbpassword" ColumnName="dbpassword" />
-                <ScalarProperty Name="compname" ColumnName="compname" />
-                <ScalarProperty Name="dbcode" ColumnName="dbcode" />
-                <ScalarProperty Name="creby" ColumnName="creby" />
-                <ScalarProperty Name="credate" ColumnName="credate" />
-                <ScalarProperty Name="chgby" ColumnName="chgby" />
-                <ScalarProperty Name="chgdate" ColumnName="chgdate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="member">
             <EntityTypeMapping TypeName="mModel.member">
               <MappingFragment StoreEntitySet="member">
-                <ScalarProperty Name="membercode" ColumnName="membercode" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="membercode" ColumnName="membercode" />
                 <ScalarProperty Name="prename" ColumnName="prename" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="addr01" ColumnName="addr01" />
                 <ScalarProperty Name="addr02" ColumnName="addr02" />
                 <ScalarProperty Name="addr03" ColumnName="addr03" />
                 <ScalarProperty Name="zipcod" ColumnName="zipcod" />
+                <ScalarProperty Name="taxid" ColumnName="taxid" />
                 <ScalarProperty Name="telnum" ColumnName="telnum" />
                 <ScalarProperty Name="faxnum" ColumnName="faxnum" />
                 <ScalarProperty Name="contact" ColumnName="contact" />
@@ -252,16 +651,86 @@
                 <ScalarProperty Name="membertype" ColumnName="membertype" />
                 <ScalarProperty Name="maxdbcount" ColumnName="maxdbcount" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="credate" ColumnName="credate" />
+                <ScalarProperty Name="chgdate" ColumnName="chgdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="scacclv">
+            <EntityTypeMapping TypeName="mModel.scacclv">
+              <MappingFragment StoreEntitySet="scacclv">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="leveltype" ColumnName="leveltype" />
+                <ScalarProperty Name="menu" ColumnName="menu" />
+                <ScalarProperty Name="submenu" ColumnName="submenu" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="scusergroup_id" ColumnName="scusergroup_id" />
+                <ScalarProperty Name="scuser_id" ColumnName="scuser_id" />
+                <ScalarProperty Name="sccompgroup_id" ColumnName="sccompgroup_id" />
+                <ScalarProperty Name="credate" ColumnName="credate" />
+                <ScalarProperty Name="chgdate" ColumnName="chgdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sccomp">
+            <EntityTypeMapping TypeName="mModel.sccomp">
+              <MappingFragment StoreEntitySet="sccomp">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="servername" ColumnName="servername" />
+                <ScalarProperty Name="dbname" ColumnName="dbname" />
+                <ScalarProperty Name="dbuser" ColumnName="dbuser" />
+                <ScalarProperty Name="dbpassword" ColumnName="dbpassword" />
+                <ScalarProperty Name="compname" ColumnName="compname" />
+                <ScalarProperty Name="credate" ColumnName="credate" />
+                <ScalarProperty Name="chgdate" ColumnName="chgdate" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="creby" ColumnName="creby" />
+                <ScalarProperty Name="chgby" ColumnName="chgby" />
+                <ScalarProperty Name="sccompgroup_id" ColumnName="sccompgroup_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sccompgroup">
+            <EntityTypeMapping TypeName="mModel.sccompgroup">
+              <MappingFragment StoreEntitySet="sccompgroup">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="groupname" ColumnName="groupname" />
+                <ScalarProperty Name="credate" ColumnName="credate" />
+                <ScalarProperty Name="chgdate" ColumnName="chgdate" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="scuser">
             <EntityTypeMapping TypeName="mModel.scuser">
               <MappingFragment StoreEntitySet="scuser">
-                <ScalarProperty Name="member_id" ColumnName="member_id" />
-                <ScalarProperty Name="passwordhash" ColumnName="passwordhash" />
-                <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="passwordhash" ColumnName="passwordhash" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="authlev" ColumnName="authlev" />
+                <ScalarProperty Name="language" ColumnName="language" />
+                <ScalarProperty Name="secure" ColumnName="secure" />
+                <ScalarProperty Name="lastlogin" ColumnName="lastlogin" />
+                <ScalarProperty Name="lastpwd" ColumnName="lastpwd" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="currentlyuse" ColumnName="currentlyuse" />
+                <ScalarProperty Name="credate" ColumnName="credate" />
+                <ScalarProperty Name="chgdate" ColumnName="chgdate" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="scusergroup_id" ColumnName="scusergroup_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="scusergroup">
+            <EntityTypeMapping TypeName="mModel.scusergroup">
+              <MappingFragment StoreEntitySet="scusergroup">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="groupname" ColumnName="groupname" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="credate" ColumnName="credate" />
+                <ScalarProperty Name="chgdate" ColumnName="chgdate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

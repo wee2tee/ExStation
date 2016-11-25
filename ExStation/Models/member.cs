@@ -17,8 +17,10 @@ namespace ExStation.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public member()
         {
-            this.dbprofile_creby = new HashSet<dbprofile>();
-            this.dbprofile_chgby = new HashSet<dbprofile>();
+            this.scacclv = new HashSet<scacclv>();
+            this.sccompgroup = new HashSet<sccompgroup>();
+            this.sccomp = new HashSet<sccomp>();
+            this.scusergroup = new HashSet<scusergroup>();
             this.scuser = new HashSet<scuser>();
         }
     
@@ -30,6 +32,7 @@ namespace ExStation.Models
         public string addr02 { get; set; }
         public string addr03 { get; set; }
         public string zipcod { get; set; }
+        public string taxid { get; set; }
         public string telnum { get; set; }
         public string faxnum { get; set; }
         public string contact { get; set; }
@@ -37,11 +40,17 @@ namespace ExStation.Models
         public string membertype { get; set; }
         public int maxdbcount { get; set; }
         public string status { get; set; }
+        public System.DateTime credate { get; set; }
+        public Nullable<System.DateTime> chgdate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<dbprofile> dbprofile_creby { get; set; }
+        public virtual ICollection<scacclv> scacclv { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<dbprofile> dbprofile_chgby { get; set; }
+        public virtual ICollection<sccompgroup> sccompgroup { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<sccomp> sccomp { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<scusergroup> scusergroup { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<scuser> scuser { get; set; }
     }

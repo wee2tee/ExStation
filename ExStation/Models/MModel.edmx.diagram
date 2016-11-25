@@ -4,13 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ba0b331805d64a8cac18f37acd2e326a" Name="Diagram1">
-        <EntityTypeShape EntityType="mModel.dbprofile" Width="1.5" PointX="3.875" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="mModel.member" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="mModel.fk_dbprofile_member" ManuallyRouted="false" />
-        <AssociationConnector Association="mModel.fk_dbprofile_member1" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="mModel.scuser" Width="1.5" PointX="4.125" PointY="1" />
-        <AssociationConnector Association="mModel.fk_scuser_member_id_member_id" />
+      <Diagram DiagramId="9a609fe3ef97412ca3a369151bb47590" Name="Diagram1">
+        <EntityTypeShape EntityType="mModel.member" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="mModel.scacclv" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="mModel.sccomp" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="mModel.sccompgroup" Width="1.5" PointX="3" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="mModel.scuser" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="mModel.scusergroup" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <AssociationConnector Association="mModel.fk_scacclv_member_id" ManuallyRouted="false" />
+        <AssociationConnector Association="mModel.fk_sccompgroup_member_id" ManuallyRouted="false" />
+        <AssociationConnector Association="mModel.fk_sccomp_member_id" ManuallyRouted="false" />
+        <AssociationConnector Association="mModel.fk_scusergroup_member_id" ManuallyRouted="false" />
+        <AssociationConnector Association="mModel.fk_scuser_member_id" ManuallyRouted="false" />
+        <AssociationConnector Association="mModel.fk_scacclv_sccompgroup_id" ManuallyRouted="false" />
+        <AssociationConnector Association="mModel.fk_scacclv_scuser_id" ManuallyRouted="false" />
+        <AssociationConnector Association="mModel.fk_scacclv_scusergroup_id" ManuallyRouted="false" />
+        <AssociationConnector Association="mModel.fk_sccomp_chgby_scuser_id" ManuallyRouted="false" />
+        <AssociationConnector Association="mModel.fk_sccomp_creby_scuser_id" ManuallyRouted="false" />
+        <AssociationConnector Association="mModel.fk_sccomp_scdbgroup_id" ManuallyRouted="false" />
+        <AssociationConnector Association="mModel.fk_scuser_scusergroup_id" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,6 +18,7 @@ namespace ExStation.SubForm
         private string user_password = string.Empty;
 
         public member member_info = null;
+        public scuser user_info = null;
 
         public DlgLogin(MainForm main_form)
         {
@@ -49,7 +50,7 @@ namespace ExStation.SubForm
         {
             using (mEntities member_db = DBX.GetMemberDB(DBX.member_server, DBX.member_db_uid, DBX.member_db_pwd, DBX.member_db_name))
             {
-                member m = member_db.member.Where(mb => mb.membercode.Trim() == this.member_code.Trim()).FirstOrDefault();
+                member m = member_db.member.Include("sccomp").Where(mb => mb.membercode.Trim() == this.member_code.Trim()).FirstOrDefault();
                 if (m != null)
                 {
                     this.member_info = m;
@@ -57,6 +58,7 @@ namespace ExStation.SubForm
                     scuser s = m.scuser.Where(u => u.username.Trim() == this.user_name.Trim() && u.passwordhash.Trim() == this.user_password.Trim()).FirstOrDefault();
                     if(s != null)
                     {
+                        this.user_info = s;
                         this.DialogResult = DialogResult.OK;
                         this.Close();
                     }

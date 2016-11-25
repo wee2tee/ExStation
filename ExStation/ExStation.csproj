@@ -70,33 +70,48 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\dbprofile.cs">
-      <DependentUpon>MModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DBX.cs" />
     <Compile Include="Models\member.cs">
-      <DependentUpon>MModel.tt</DependentUpon>
+      <DependentUpon>mModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MModel.Context.cs">
+    <Compile Include="Models\mModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MModel.Context.tt</DependentUpon>
+      <DependentUpon>mModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MModel.cs">
+    <Compile Include="Models\mModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MModel.tt</DependentUpon>
+      <DependentUpon>mModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MModel.Designer.cs">
+    <Compile Include="Models\mModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MModel.edmx</DependentUpon>
+      <DependentUpon>mModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\scacclv.cs">
+      <DependentUpon>mModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sccomp.cs">
+      <DependentUpon>mModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sccompgroup.cs">
+      <DependentUpon>mModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\scuser.cs">
-      <DependentUpon>MModel.tt</DependentUpon>
+      <DependentUpon>mModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\scusergroup.cs">
+      <DependentUpon>mModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubForm\DlgCompanySelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForm\DlgCompanySelect.Designer.cs">
+      <DependentUpon>DlgCompanySelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="SubForm\DlgLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,16 +131,19 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SubForm\DlgCompanySelect.resx">
+      <DependentUpon>DlgCompanySelect.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SubForm\DlgLogin.resx">
       <DependentUpon>DlgLogin.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
-    <EntityDeploy Include="Models\MModel.edmx">
+    <EntityDeploy Include="Models\mModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>mModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\MModel.edmx.diagram">
-      <DependentUpon>MModel.edmx</DependentUpon>
+    <None Include="Models\mModel.edmx.diagram">
+      <DependentUpon>mModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -142,20 +160,22 @@
     <Folder Include="Misc\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\MModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MModel.edmx</DependentUpon>
-      <LastGenOutput>MModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\MModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MModel.edmx</DependentUpon>
-      <LastGenOutput>MModel.cs</LastGenOutput>
-    </Content>
     <None Include="Resources\express-logo-static.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\mModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>mModel.edmx</DependentUpon>
+      <LastGenOutput>mModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\mModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>mModel.edmx</DependentUpon>
+      <LastGenOutput>mModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -30,8 +30,11 @@ namespace ExStation.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<dbprofile> dbprofile { get; set; }
         public virtual DbSet<member> member { get; set; }
+        public virtual DbSet<scacclv> scacclv { get; set; }
+        public virtual DbSet<sccomp> sccomp { get; set; }
+        public virtual DbSet<sccompgroup> sccompgroup { get; set; }
         public virtual DbSet<scuser> scuser { get; set; }
+        public virtual DbSet<scusergroup> scusergroup { get; set; }
     }
 }

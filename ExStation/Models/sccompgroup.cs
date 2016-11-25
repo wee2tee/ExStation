@@ -12,39 +12,25 @@ namespace ExStation.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class scuser
+    public partial class sccompgroup
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public scuser()
+        public sccompgroup()
         {
             this.scacclv = new HashSet<scacclv>();
             this.sccomp = new HashSet<sccomp>();
-            this.sccomp1 = new HashSet<sccomp>();
         }
     
         public int id { get; set; }
-        public string username { get; set; }
-        public string passwordhash { get; set; }
-        public string description { get; set; }
-        public int authlev { get; set; }
-        public string language { get; set; }
-        public string secure { get; set; }
-        public Nullable<System.DateTime> lastlogin { get; set; }
-        public Nullable<System.DateTime> lastpwd { get; set; }
-        public string status { get; set; }
-        public bool currentlyuse { get; set; }
+        public string groupname { get; set; }
         public System.DateTime credate { get; set; }
         public Nullable<System.DateTime> chgdate { get; set; }
         public int member_id { get; set; }
-        public int scusergroup_id { get; set; }
     
         public virtual member member { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<scacclv> scacclv { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<sccomp> sccomp { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<sccomp> sccomp1 { get; set; }
-        public virtual scusergroup scusergroup { get; set; }
     }
 }

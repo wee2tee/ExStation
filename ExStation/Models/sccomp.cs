@@ -12,7 +12,7 @@ namespace ExStation.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class dbprofile
+    public partial class sccomp
     {
         public int id { get; set; }
         public string servername { get; set; }
@@ -20,13 +20,16 @@ namespace ExStation.Models
         public string dbuser { get; set; }
         public string dbpassword { get; set; }
         public string compname { get; set; }
-        public string dbcode { get; set; }
-        public int creby { get; set; }
         public System.DateTime credate { get; set; }
-        public Nullable<int> chgby { get; set; }
         public Nullable<System.DateTime> chgdate { get; set; }
+        public int member_id { get; set; }
+        public int creby { get; set; }
+        public Nullable<int> chgby { get; set; }
+        public int sccompgroup_id { get; set; }
     
-        public virtual member fkCreby_Member { get; set; }
-        public virtual member fkChgby_Member { get; set; }
+        public virtual member member { get; set; }
+        public virtual scuser scuser { get; set; }
+        public virtual scuser scuser1 { get; set; }
+        public virtual sccompgroup sccompgroup { get; set; }
     }
 }
