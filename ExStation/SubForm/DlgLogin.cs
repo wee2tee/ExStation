@@ -28,7 +28,9 @@ namespace ExStation.SubForm
 
         private void DlgLogin_Load(object sender, EventArgs e)
         {
-
+            this.txtMemberCode.Text = "S000001";
+            this.txtUserName.Text = "BIT9";
+            this.txtPassword.Text = "BIT9";
         }
 
         private void txtMemberCode_TextChanged(object sender, EventArgs e)
@@ -50,7 +52,7 @@ namespace ExStation.SubForm
         {
             using (mEntities member_db = DBX.GetMemberDB(DBX.member_server, DBX.member_db_uid, DBX.member_db_pwd, DBX.member_db_name))
             {
-                member m = member_db.member.Include("sccomp").Where(mb => mb.membercode.Trim() == this.member_code.Trim()).FirstOrDefault();
+                member m = member_db.member.Include("sccomp").Include("sccompgroup").Where(mb => mb.membercode.Trim() == this.member_code.Trim()).FirstOrDefault();
                 if (m != null)
                 {
                     this.member_info = m;

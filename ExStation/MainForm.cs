@@ -15,6 +15,7 @@ namespace ExStation
     {
         public member member_info;
         public scuser user_info;
+        public sccomp comp_info;
 
         public MainForm()
         {
@@ -34,10 +35,18 @@ namespace ExStation
                 if (login.ShowDialog() == DialogResult.OK)
                 {
                     DlgCompanySelect comp = new DlgCompanySelect(login.member_info, login.user_info);
-                    comp.ShowDialog();
-
-                    this.member_info = login.member_info;
-                    this.toolStripStatusLabel1.Text = this.member_info.prename + " " + this.member_info.name;
+                    if(comp.ShowDialog() == DialogResult.OK)
+                    {
+                        this.member_info = login.member_info;
+                        this.user_info = login.user_info;
+                        this.comp_info = comp.selected_comp;
+                        
+                        this.toolStripStatusLabel1.Text = this.member_info.membercode + " [" + this.comp_info.compname + "]";
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
                 }
                 else
                 {
