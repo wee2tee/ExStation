@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -101,15 +102,38 @@ namespace CC
             }
             if (this.allow_sort_by_column_header_clicked)
             {
+                //this.CellMouseClick += new DataGridViewCellMouseEventHandler(this.SortByColumnHeaderClicked);
                 this.CellPainting += new DataGridViewCellPaintingEventHandler(this.DrawColumnHeaderSortSign);
             }
         }
 
+        //private void SortByColumnHeaderClicked(object sender, DataGridViewCellMouseEventArgs e)
+        //{
+        //    if (this.allow_sort_by_column_header_clicked)
+        //    {
+        //        IEnumerable data = ((BindingSource)this.DataSource).DataSource as IEnumerable;
+        //        ((BindingSource)this.DataSource).ResetBindings(true);
+        //        ((BindingSource)this.DataSource).DataSource = data.Cast<DataGridViewRow>().Where;
+        //    }
+        //}
+
         private void DrawColumnHeaderSortSign(object sender, DataGridViewCellPaintingEventArgs e)
         {
+            e.Paint(e.ClipBounds, DataGridViewPaintParts.All);
+            
             if (e.RowIndex == -1 && e.ColumnIndex == this.SortColumn)
             {
-                e.Graphics.DrawPolygon(new Pen(Color.Red), new Point[] { new Point(e.CellBounds.X + 5, e.CellBounds.Y + 5), new Point(e.CellBounds.X + 11, e.CellBounds.Y + 5), new Point(e.CellBounds.X + 8, e.CellBounds.Y + 11) });
+                using (SolidBrush brush = new SolidBrush(Color.Sienna))
+                {
+                    if (this.sort_asc)
+                    {
+                        e.Graphics.FillPolygon(brush, new Point[] { new Point(e.CellBounds.X + e.CellBounds.Width - 5, e.CellBounds.Y + 10), new Point(e.CellBounds.X + e.CellBounds.Width - 12, e.CellBounds.Y + 10), new Point(e.CellBounds.X + e.CellBounds.Width - 9, e.CellBounds.Y + 16) });
+                    }
+                    else
+                    {
+                        e.Graphics.FillPolygon(brush, new Point[] { new Point(e.CellBounds.X + e.CellBounds.Width - 5, e.CellBounds.Y + 16), new Point(e.CellBounds.X + e.CellBounds.Width - 12, e.CellBounds.Y + 16), new Point(e.CellBounds.X + e.CellBounds.Width - 9, e.CellBounds.Y + 10) });
+                    }
+                }
                 e.Handled = true;
             }
         }
@@ -122,6 +146,28 @@ namespace CC
             {
                 e.Graphics.DrawLine(p, new Point(rect.X, rect.Y), new Point(rect.X + rect.Width, rect.Y));
                 e.Graphics.DrawLine(p, new Point(rect.X, rect.Y + rect.Height - 2), new Point(rect.X + rect.Width, rect.Y + rect.Height - 2));
+            }
+        }
+
+        public void SortByColumn<T>(int column_index)
+        {
+            List<T> list = new List<T>();
+            if (this.allow_sort_by_column_header_clicked)
+            {
+                string field_name = this.Columns[column_index].DataPropertyName;
+
+                List<T> data = ((BindingSource)this.DataSource).DataSource as List<T>;
+                this.sort_asc = !this.sort_asc;
+                if (this.SortASC)
+                {
+                    data = data.OrderBy(d => d.GetType().GetProperty(field_name).GetValue(d, null)).ToList();
+                }
+                else
+                {
+                    data = data.OrderByDescending(d => d.GetType().GetProperty(field_name).GetValue(d, null)).ToList();
+                }
+                ((BindingSource)this.DataSource).ResetBindings(true);
+                ((BindingSource)this.DataSource).DataSource = data;
             }
         }
 

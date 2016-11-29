@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using ExStation.Models;
 using ExStation.Models.ViewModels;
 using ExStation.Misc;
+using CC;
 
 namespace ExStation.SubForm
 {
@@ -78,32 +79,33 @@ namespace ExStation.SubForm
         {
             if(e.RowIndex == -1)
             {
-                DataGridViewColumn col = ((DataGridView)sender).Columns[e.ColumnIndex];
-                this.dgv.SetSortColumnInfo(col.Index, true);
+                ((XDatagrid)sender).SortByColumn<SccompVM>(e.ColumnIndex);
+                //DataGridViewColumn col = ((DataGridView)sender).Columns[e.ColumnIndex];
+                //this.dgv.SetSortColumnInfo(col.Index, !this.dgv.SortASC);
 
-                if(col.Index == this.sort_column_index)
-                {
-                    this.sort_asc = !this.sort_asc;
-                }
-                else
-                {
-                    this.sort_asc = true;
-                    this.sort_column_index = col.Index;
-                }
+                //if(col.Index == this.sort_column_index)
+                //{
+                //    this.sort_asc = !this.sort_asc;
+                //}
+                //else
+                //{
+                //    this.sort_asc = true;
+                //    this.sort_column_index = col.Index;
+                //}
 
-                string field_name = ((DataGridView)sender).Columns[e.ColumnIndex].DataPropertyName;
+                //string field_name = ((DataGridView)sender).Columns[e.ColumnIndex].DataPropertyName;
 
-                if (this.sort_asc)
-                {
-                    this.company_list = this.company_list.OrderBy(s => s.GetType().GetProperty(field_name).GetValue(s, null)).ToList();
-                }
-                else
-                {
-                    this.company_list = this.company_list.OrderByDescending(s => s.GetType().GetProperty(field_name).GetValue(s, null)).ToList();
-                }
+                //if (this.sort_asc)
+                //{
+                //    this.company_list = this.company_list.OrderBy(s => s.GetType().GetProperty(field_name).GetValue(s, null)).ToList();
+                //}
+                //else
+                //{
+                //    this.company_list = this.company_list.OrderByDescending(s => s.GetType().GetProperty(field_name).GetValue(s, null)).ToList();
+                //}
 
-                this.bs.ResetBindings(true);
-                this.bs.DataSource = this.company_list;
+                //this.bs.ResetBindings(true);
+                //this.bs.DataSource = this.company_list;
             }
         }
 
