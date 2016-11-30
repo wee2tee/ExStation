@@ -107,16 +107,6 @@ namespace CC
             }
         }
 
-        //private void SortByColumnHeaderClicked(object sender, DataGridViewCellMouseEventArgs e)
-        //{
-        //    if (this.allow_sort_by_column_header_clicked)
-        //    {
-        //        IEnumerable data = ((BindingSource)this.DataSource).DataSource as IEnumerable;
-        //        ((BindingSource)this.DataSource).ResetBindings(true);
-        //        ((BindingSource)this.DataSource).DataSource = data.Cast<DataGridViewRow>().Where;
-        //    }
-        //}
-
         private void DrawColumnHeaderSortSign(object sender, DataGridViewCellPaintingEventArgs e)
         {
             e.Paint(e.ClipBounds, DataGridViewPaintParts.All);
@@ -125,13 +115,39 @@ namespace CC
             {
                 using (SolidBrush brush = new SolidBrush(Color.Sienna))
                 {
-                    if (this.sort_asc)
+                    if (!this.sort_asc)
                     {
-                        e.Graphics.FillPolygon(brush, new Point[] { new Point(e.CellBounds.X + e.CellBounds.Width - 5, e.CellBounds.Y + 10), new Point(e.CellBounds.X + e.CellBounds.Width - 12, e.CellBounds.Y + 10), new Point(e.CellBounds.X + e.CellBounds.Width - 9, e.CellBounds.Y + 16) });
+                        /* แสดงแบบ Z->A */
+                        using (Font font = new Font("tahoma", 5f))
+                        {
+                            e.Graphics.DrawString("Z", font, brush, new Point(e.CellBounds.X + e.CellBounds.Width - 16, e.CellBounds.Y + 6));
+                            e.Graphics.DrawString("A", font, brush, new Point(e.CellBounds.X + e.CellBounds.Width - 16, e.CellBounds.Y + 13));
+                        }
+                        using (Pen pen = new Pen(Color.Sienna))
+                        {
+                            e.Graphics.DrawLine(pen, new Point(e.CellBounds.X + e.CellBounds.Width - 7, e.CellBounds.Y + 9), new Point(e.CellBounds.X + e.CellBounds.Width - 7, e.CellBounds.Y + 19));
+                        }
+                        e.Graphics.FillPolygon(brush, new Point[] { new Point(e.CellBounds.X + e.CellBounds.Width - 9, e.CellBounds.Y + 17), new Point(e.CellBounds.X + e.CellBounds.Width - 4, e.CellBounds.Y + 17), new Point(e.CellBounds.X + e.CellBounds.Width - 7, e.CellBounds.Y + 19) });
+                        
+                        /* แสดงเป็นรูปสามเหลี่ยม */
+                        //e.Graphics.FillPolygon(brush, new Point[] { new Point(e.CellBounds.X + e.CellBounds.Width - 5, e.CellBounds.Y + 10), new Point(e.CellBounds.X + e.CellBounds.Width - 12, e.CellBounds.Y + 10), new Point(e.CellBounds.X + e.CellBounds.Width - 9, e.CellBounds.Y + 16) });
                     }
                     else
                     {
-                        e.Graphics.FillPolygon(brush, new Point[] { new Point(e.CellBounds.X + e.CellBounds.Width - 5, e.CellBounds.Y + 16), new Point(e.CellBounds.X + e.CellBounds.Width - 12, e.CellBounds.Y + 16), new Point(e.CellBounds.X + e.CellBounds.Width - 9, e.CellBounds.Y + 10) });
+                        /* แสดงแบบ A->Z */
+                        using (Font font = new Font("tahoma", 5f))
+                        {
+                            e.Graphics.DrawString("A", font, brush, new Point(e.CellBounds.X + e.CellBounds.Width - 16, e.CellBounds.Y + 6));
+                            e.Graphics.DrawString("Z", font, brush, new Point(e.CellBounds.X + e.CellBounds.Width - 16, e.CellBounds.Y + 13));
+                        }
+                        using (Pen pen = new Pen(Color.Sienna))
+                        {
+                            e.Graphics.DrawLine(pen, new Point(e.CellBounds.X + e.CellBounds.Width - 7, e.CellBounds.Y + 9), new Point(e.CellBounds.X + e.CellBounds.Width - 7, e.CellBounds.Y + 19));
+                        }
+                        e.Graphics.FillPolygon(brush, new Point[] { new Point(e.CellBounds.X + e.CellBounds.Width - 9, e.CellBounds.Y + 17), new Point(e.CellBounds.X + e.CellBounds.Width - 4, e.CellBounds.Y + 17), new Point(e.CellBounds.X + e.CellBounds.Width - 7, e.CellBounds.Y + 19) });
+
+                        /* แสดงเป็นรูปสามเหลี่ยม */
+                        //e.Graphics.FillPolygon(brush, new Point[] { new Point(e.CellBounds.X + e.CellBounds.Width - 5, e.CellBounds.Y + 16), new Point(e.CellBounds.X + e.CellBounds.Width - 12, e.CellBounds.Y + 16), new Point(e.CellBounds.X + e.CellBounds.Width - 9, e.CellBounds.Y + 10) });
                     }
                 }
                 e.Handled = true;
@@ -149,15 +165,18 @@ namespace CC
             }
         }
 
+        /* 
+         * Sort DataGridViewRow by column header clicked (Specify an object type that implement in bindingsource)
+         */
         public void SortByColumn<T>(int column_index)
         {
-            List<T> list = new List<T>();
-            if (this.allow_sort_by_column_header_clicked)
+            if (this.allow_sort_by_column_header_clicked && this.Columns[column_index].SortMode != DataGridViewColumnSortMode.NotSortable)
             {
+                this.SetSortColumnInfo(column_index);
+
                 string field_name = this.Columns[column_index].DataPropertyName;
 
                 List<T> data = ((BindingSource)this.DataSource).DataSource as List<T>;
-                this.sort_asc = !this.sort_asc;
                 if (this.SortASC)
                 {
                     data = data.OrderBy(d => d.GetType().GetProperty(field_name).GetValue(d, null)).ToList();
@@ -171,10 +190,17 @@ namespace CC
             }
         }
 
-        public void SetSortColumnInfo(int sort_column, bool sort_asc)
+        public void SetSortColumnInfo(int sort_column)
         {
-            this.sort_column = sort_column;
-            this.sort_asc = sort_asc;
+            if(this.SortColumn == sort_column)
+            {
+                this.sort_asc = !this.SortASC;
+            }
+            else
+            {
+                this.sort_column = sort_column;
+                this.sort_asc = true;
+            }
         }
 
         protected override void OnPaint(PaintEventArgs pe)

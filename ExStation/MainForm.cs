@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using ExStation.Models;
 using ExStation.SubForm;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace ExStation
 {
@@ -24,7 +26,10 @@ namespace ExStation
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
+            //XmlSerializer xml = new XmlSerializer(typeof(List<XMenu>));
+            //TextReader text_reader = new StreamReader(@"mnu.xml");
+            //List<XMenu> menu = (List<XMenu>)xml.Deserialize(text_reader);
+            //text_reader.Close();
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -41,7 +46,7 @@ namespace ExStation
                         this.user_info = login.user_info;
                         this.comp_info = comp.selected_comp;
                         
-                        this.toolStripStatusLabel1.Text = this.member_info.membercode + " [" + this.comp_info.compname + "]";
+                        this.lblDbName.Text = this.comp_info.dbname + " [ " + this.comp_info.compname + " ]";
                     }
                     else
                     {

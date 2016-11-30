@@ -45,6 +45,11 @@ namespace ExStation.SubForm
                 this.btnOK.PerformClick();
                 return true;
             }
+            if(keyData == Keys.Escape)
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }

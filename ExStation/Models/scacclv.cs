@@ -24,6 +24,13 @@ namespace ExStation.Models
         public int sccompgroup_id { get; set; }
         public System.DateTime credate { get; set; }
         public Nullable<System.DateTime> chgdate { get; set; }
+        public string isread { get; set; }
+        public string isadd { get; set; }
+        public string isedit { get; set; }
+        public string isdelete { get; set; }
+        public string isprint { get; set; }
+        public string iscancel { get; set; }
+        public string isapprove { get; set; }
     
         public virtual member member { get; set; }
         public virtual sccompgroup sccompgroup { get; set; }

@@ -15,12 +15,11 @@ namespace ExStation.SubForm
 {
     public partial class DlgCompanySelect : Form
     {
+        //private BindingSource bs;
         private BindingSource bs;
         private List<SccompVM> company_list = new List<SccompVM>();
         private member member;
         private scuser user;
-        private bool sort_asc;
-        private int sort_column_index;
 
         public sccomp selected_comp;
 
@@ -35,14 +34,32 @@ namespace ExStation.SubForm
         {
             this.bs = new BindingSource();
             this.bs.DataSource = this.company_list;
-            this.dgv.DataSource = this.bs;
 
-            this.company_list = this.member.sccomp.OrderBy(s => s.compname).ToList().ToViewModel();
+            if(this.user.secure == "1")
+            {
+                List<sccomp> comp = new List<sccomp>();
+
+                foreach (var c in this.member.sccomp)
+                {
+                    if(this.user.scacclv.Where(a => a.sccompgroup_id == c.sccompgroup_id).Count() > 0)
+                    {
+                        comp.Add(c);
+                    }
+                }
+
+                this.company_list = comp.OrderBy(s => s.compname).ToList().ToViewModel();
+            }
+            else
+            {
+                this.company_list = this.member.sccomp.OrderBy(s => s.compname).ToList().ToViewModel();
+            }
+
+
             this.bs.ResetBindings(true);
             this.bs.DataSource = this.company_list;
 
-            this.sort_asc = true;
-            this.sort_column_index = this.dgv.Columns["col_compname"].Index;
+            this.dgv.DataSource = this.bs;
+            this.dgv.SortByColumn<SccompVM>(this.dgv.Columns["col_compname"].Index);
         }
 
         private void dgv_CurrentCellChanged(object sender, EventArgs e)
@@ -80,32 +97,14 @@ namespace ExStation.SubForm
             if(e.RowIndex == -1)
             {
                 ((XDatagrid)sender).SortByColumn<SccompVM>(e.ColumnIndex);
-                //DataGridViewColumn col = ((DataGridView)sender).Columns[e.ColumnIndex];
-                //this.dgv.SetSortColumnInfo(col.Index, !this.dgv.SortASC);
+            }
+        }
 
-                //if(col.Index == this.sort_column_index)
-                //{
-                //    this.sort_asc = !this.sort_asc;
-                //}
-                //else
-                //{
-                //    this.sort_asc = true;
-                //    this.sort_column_index = col.Index;
-                //}
-
-                //string field_name = ((DataGridView)sender).Columns[e.ColumnIndex].DataPropertyName;
-
-                //if (this.sort_asc)
-                //{
-                //    this.company_list = this.company_list.OrderBy(s => s.GetType().GetProperty(field_name).GetValue(s, null)).ToList();
-                //}
-                //else
-                //{
-                //    this.company_list = this.company_list.OrderByDescending(s => s.GetType().GetProperty(field_name).GetValue(s, null)).ToList();
-                //}
-
-                //this.bs.ResetBindings(true);
-                //this.bs.DataSource = this.company_list;
+        private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex > -1)
+            {
+                this.btnOK.PerformClick();
             }
         }
 
@@ -114,6 +113,12 @@ namespace ExStation.SubForm
             if(keyData == Keys.Enter)
             {
                 this.btnOK.PerformClick();
+                return true;
+            }
+
+            if(keyData == Keys.Escape)
+            {
+                this.btnCancel.PerformClick();
                 return true;
             }
 

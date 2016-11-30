@@ -52,13 +52,14 @@ namespace ExStation.SubForm
         {
             using (mEntities member_db = DBX.GetMemberDB(DBX.member_server, DBX.member_db_uid, DBX.member_db_pwd, DBX.member_db_name))
             {
-                member m = member_db.member.Include("sccomp").Include("sccompgroup").Where(mb => mb.membercode.Trim() == this.member_code.Trim()).FirstOrDefault();
+                member m = member_db.member.Include("scusergroup").Include("scuser").Include("sccompgroup").Include("sccomp").Include("scacclv").Where(mb => mb.membercode.Trim() == this.member_code.Trim()).FirstOrDefault();
                 if (m != null)
                 {
                     this.member_info = m;
 
-                    scuser s = m.scuser.Where(u => u.username.Trim() == this.user_name.Trim() && u.passwordhash.Trim() == this.user_password.Trim()).FirstOrDefault();
-                    if(s != null)
+                    scuser s = member_db.scuser.Include("scacclv").Include("sccomp").Where(u => u.username.Trim() == this.user_name.Trim() && u.passwordhash.Trim() == this.user_password.Trim()).FirstOrDefault();
+
+                    if (s != null)
                     {
                         this.user_info = s;
                         this.DialogResult = DialogResult.OK;
@@ -76,6 +77,17 @@ namespace ExStation.SubForm
 
             }
 
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if(keyData == Keys.Enter && !(this.btnOK.Focused || this.btnCancel.Focused))
+            {
+                SendKeys.Send("{TAB}");
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

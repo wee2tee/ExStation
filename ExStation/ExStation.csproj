@@ -75,6 +75,7 @@
     <Compile Include="Models\member.cs">
       <DependentUpon>mModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MenuModel.cs" />
     <Compile Include="Models\mModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -180,6 +181,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="mnu.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Models\mModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>mModel.edmx</DependentUpon>

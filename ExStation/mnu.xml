@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XMenu>
+  <menuID>1</menuID>
+  <nameTh>เมนู 1</nameTh>
+  <nameEn>Menu 1</nameEn>
+  <parentMenu></parentMenu>
+  <childMenu>
+    <XMenu>
+      <menuID>1-1</menuID>
+      <nameTh>เมนู 1-1</nameTh>
+      <nameEn>Menu 1-1</nameEn>
+      <parentMenu>1</parentMenu>
+      <childMenu>
+        <XMenu>
+          <menuID>1-1-1</menuID>
+          <nameTh>เมนู 1-1-1</nameTh>
+          <nameEn>Menu 1-1-1</nameEn>
+          <parentMenu>1-1</parentMenu>
+          <childMenu></childMenu>
+        </XMenu>
+        <XMenu>
+          <menuID>1-1-2</menuID>
+          <nameTh>เมนู 1-1-2</nameTh>
+          <nameEn>Menu 1-1-2</nameEn>
+          <parentMenu>1-1</parentMenu>
+          <childMenu></childMenu>
+        </XMenu>
+      </childMenu>
+    </XMenu>
+  </childMenu>
+</XMenu>

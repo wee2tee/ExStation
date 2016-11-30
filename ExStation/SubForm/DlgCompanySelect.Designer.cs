@@ -34,7 +34,6 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnFind = new System.Windows.Forms.Button();
-            this.btnSort = new System.Windows.Forms.Button();
             this.dgv = new CC.XDatagrid();
             this.col_sccomp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,7 +48,7 @@
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(9, 210);
+            this.btnOK.Location = new System.Drawing.Point(9, 186);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(70, 35);
             this.btnOK.TabIndex = 1;
@@ -60,7 +59,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(85, 210);
+            this.btnCancel.Location = new System.Drawing.Point(85, 186);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(70, 35);
             this.btnCancel.TabIndex = 2;
@@ -70,23 +69,13 @@
             // btnFind
             // 
             this.btnFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnFind.Location = new System.Drawing.Point(187, 210);
+            this.btnFind.Location = new System.Drawing.Point(187, 186);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(70, 35);
             this.btnFind.TabIndex = 3;
             this.btnFind.Text = "ค้นหา";
             this.btnFind.UseVisualStyleBackColor = true;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
-            // 
-            // btnSort
-            // 
-            this.btnSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSort.Location = new System.Drawing.Point(263, 210);
-            this.btnSort.Name = "btnSort";
-            this.btnSort.Size = new System.Drawing.Size(111, 35);
-            this.btnSort.TabIndex = 4;
-            this.btnSort.Text = "เรียงใหม่ <Tab>";
-            this.btnSort.UseVisualStyleBackColor = true;
             // 
             // dgv
             // 
@@ -132,9 +121,10 @@
             this.dgv.ReadOnly = true;
             this.dgv.RowHeadersVisible = false;
             this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv.Size = new System.Drawing.Size(825, 193);
+            this.dgv.Size = new System.Drawing.Size(879, 169);
             this.dgv.StandardTab = true;
             this.dgv.TabIndex = 5;
+            this.dgv.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
             this.dgv.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_CellMouseClick);
             this.dgv.CurrentCellChanged += new System.EventHandler(this.dgv_CurrentCellChanged);
             // 
@@ -196,9 +186,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(836, 257);
+            this.ClientSize = new System.Drawing.Size(890, 233);
             this.Controls.Add(this.dgv);
-            this.Controls.Add(this.btnSort);
             this.Controls.Add(this.btnFind);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
@@ -222,7 +211,6 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnFind;
-        private System.Windows.Forms.Button btnSort;
         private CC.XDatagrid dgv;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_sccomp;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_id;

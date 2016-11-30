@@ -19,12 +19,12 @@ namespace ExStation.Models
             : base("name=mEntities")
         {
         }
-    
+
         public mEntities(string connection_string)
             : base(connection_string)
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
