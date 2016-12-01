@@ -48,6 +48,10 @@
       <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net40\MySql.Data.Entity.EF6.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -71,6 +75,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Misc\Helper.cs" />
+    <Compile Include="Misc\MessageManager.cs" />
     <Compile Include="Models\DBX.cs" />
     <Compile Include="Models\member.cs">
       <DependentUpon>mModel.tt</DependentUpon>
@@ -106,6 +111,7 @@
     <Compile Include="Models\scusergroup.cs">
       <DependentUpon>mModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TextMessage.cs" />
     <Compile Include="Models\ViewModels\SccompVM.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,8 +160,17 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>mModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="mnu.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Models\mModel.edmx.diagram">
       <DependentUpon>mModel.edmx</DependentUpon>
+    </None>
+    <None Include="MSG_EN.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MSG_TH.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -181,9 +196,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="mnu.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Models\mModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>mModel.edmx</DependentUpon>

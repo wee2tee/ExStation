@@ -1,0 +1,18 @@
+﻿[
+  {
+    "msgID": "mnuPurchase",
+    "message": "Purchase"
+  },
+  {
+    "msgID": "mnuPurchase_1",
+    "message": "Deposit Payments"
+  },
+  {
+    "msgID": "mnuPurchase_2",
+    "message": "Cash Purchase"
+  },
+  {
+    "msgID": "mnuSale",
+    "message": "Sales"
+  }
+]

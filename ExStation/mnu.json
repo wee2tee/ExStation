@@ -1,0 +1,58 @@
+﻿[
+  {
+    "menuID": "1",
+    "nameTh": "เมนู 1",
+    "nameEn": "Menu 1",
+    "parentMenu": "",
+    "childMenu": [
+      {
+        "menuID": "1-1",
+        "nameTh": "เมนู 1-1",
+        "nameEn": "Menu 1-1",
+        "parentMenu": "1"
+      },
+      {
+        "menuID": "1-2",
+        "nameTh": "เมนู 1-2",
+        "nameEn": "Menu 1-2",
+        "parentMenu": "1",
+        "childMenu": [
+          {
+            "menuID": "1-2-1",
+            "nameTh": "เมนู 1-2-1",
+            "nameEn": "Menu 1-2-1",
+            "parentMenu": "1-2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "menuID": "2",
+    "nameTh": "เมนู 2",
+    "nameEn": "Menu 2",
+    "parentMenu": "",
+    "childMenu": [
+      {
+        "menuID": "2-1",
+        "nameTh": "เมนู 2-1",
+        "nameEn": "Menu 2-1",
+        "parentMenu": "2"
+      },
+      {
+        "menuID": "2-2",
+        "nameTh": "เมนู 2-2",
+        "nameEn": "Menu 2-2",
+        "parentMenu": "2",
+        "childMenu": [
+          {
+            "menuID": "2-2-1",
+            "nameTh": "เมนู 2-2-1",
+            "nameEn": "Menu 2-2-1",
+            "parentMenu": "2-2"
+          }
+        ]
+      }
+    ]
+  }
+]

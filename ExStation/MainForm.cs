@@ -8,8 +8,11 @@ using System.Text;
 using System.Windows.Forms;
 using ExStation.Models;
 using ExStation.SubForm;
+using ExStation.Misc;
 using System.Xml.Serialization;
 using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ExStation
 {
@@ -18,6 +21,7 @@ namespace ExStation
         public member member_info;
         public scuser user_info;
         public sccomp comp_info;
+        public List<TextMessage> msg;
 
         public MainForm()
         {
@@ -26,10 +30,7 @@ namespace ExStation
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //XmlSerializer xml = new XmlSerializer(typeof(List<XMenu>));
-            //TextReader text_reader = new StreamReader(@"mnu.xml");
-            //List<XMenu> menu = (List<XMenu>)xml.Deserialize(text_reader);
-            //text_reader.Close();
+            
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -47,6 +48,9 @@ namespace ExStation
                         this.comp_info = comp.selected_comp;
                         
                         this.lblDbName.Text = this.comp_info.dbname + " [ " + this.comp_info.compname + " ]";
+
+                        this.msg = MessageManager.LoadMessage(this.user_info.language);
+                        this.SetMenuText(this.mainMenu);
                     }
                     else
                     {
@@ -56,6 +60,35 @@ namespace ExStation
                 else
                 {
                     this.Close();
+                }
+            }
+        }
+
+        private void SetMenuText(Component menu)
+        {
+            if(menu is MenuStrip)
+            {
+                foreach (ToolStripMenuItem item in ((MenuStrip)menu).Items)
+                {
+                    item.Text = (this.msg.Get(item.Name) != null ? this.msg.Get(item.Name) : item.Text);
+
+                    if(item.DropDownItems.Count > 0)
+                    {
+                        this.SetMenuText(item);
+                    }
+                }
+            }
+            
+            if(menu is ToolStripMenuItem)
+            {
+                foreach (ToolStripMenuItem item in ((ToolStripMenuItem)menu).DropDownItems)
+                {
+                    item.Text = (this.msg.Get(item.Name) != null ? this.msg.Get(item.Name) : item.Text);
+
+                    if (item.DropDownItems.Count > 0)
+                    {
+                        this.SetMenuText(item);
+                    }
                 }
             }
         }

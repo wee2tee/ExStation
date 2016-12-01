@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using ExStation.Models;
 using ExStation.Models.ViewModels;
+using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace ExStation.Misc
 {
@@ -39,6 +41,19 @@ namespace ExStation.Misc
             }
 
             return vm;
+        }
+
+        public static string Get(this List<TextMessage> msg, string messageID)
+        {
+            TextMessage message = msg.Where(m => m.msgID == messageID).FirstOrDefault();
+            if(message != null)
+            {
+                return message.message;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

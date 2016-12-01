@@ -1,0 +1,18 @@
+﻿[
+  {
+    "msgID": "mnuPurchase",
+    "message": "ซื้อ"
+  },
+  {
+    "msgID": "mnuPurchase_1",
+    "message": "จ่ายเงินมัดจำ"
+  },
+  {
+    "msgID": "mnuPurchase_2",
+    "message": "ซื้อสด"
+  },
+  {
+    "msgID": "mnuSale",
+    "message": "ขาย"
+  }
+]
